@@ -1,11 +1,12 @@
+//CORE IMPORTS
 import React, { Component } from "react";
 import axios from "axios";
 
+//COMPONENT IMPORTS
 import PKMCard from "./PKMCard";
-
 export default class PKMList extends Component {
   state = {
-    url: "https://pokeapi.co/api/v2/pokemon/",
+    url: "https://pokeapi.co/api/v2/pokemon/?limit=500",
     pkm: null
   };
 

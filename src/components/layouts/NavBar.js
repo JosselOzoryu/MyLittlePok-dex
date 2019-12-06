@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-//import styled from "styled-components";
-
-// const NavBarStyle = style.nav``;
-
 export default class NavBar extends Component {
   render() {
     return (

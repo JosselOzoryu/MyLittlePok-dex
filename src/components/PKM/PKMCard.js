@@ -12,8 +12,16 @@ const PKMsprite = styled.img`
 `;
 
 const Card = styled.div`
-box-shadow: 0 1px 3px rgb(0,0,0,1), 0 1px 2px rgb(0,0,0,1);
-`
+  box-shadow: 0 1px 3px rgb(0, 0, 0, 1), 0 1px 2px rgb(0, 0, 0, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+  -moz-user-select: none;
+  -website-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+`;
 export default class PKMCard extends Component {
   state = {
     pkmIndex: "",
@@ -30,39 +38,52 @@ export default class PKMCard extends Component {
     this.setState({ name, imageUrl, pkmIndex });
   }
 
+  handleOnLoad = () => this.setState({ imageIsLoading: false });
+  handleOnError = () => this.setState({ excesiveReq: true });
+
   render() {
+    const {
+      pkmIndex,
+      imageIsLoading,
+      excesiveReq,
+      imageUrl,
+      name
+    } = this.state;
+
     return (
-      <div className="col-md-3 col-sm-6 mb-5">
+      <div className="col-md-2 col-sm-6 mb-5">
         <Card className="card">
-          <h5 className="card-header">{this.state.pkmIndex}</h5>
-          {this.state.imageIsLoading ? (
+          <h5 className="card-header">{pkmIndex}</h5>
+
+          {imageIsLoading && (
             <image
               src={loadingGIF}
               style={{ width: "5em", height: "5em" }}
               className="card-img-top mx-auto d-block mt-2"
             ></image>
-          ) : null}
+          )}
+
           <PKMsprite
             className="card-img-top mx-auto mt-2"
-            onLoad={() => this.setState({ imageIsLoading: false })}
-            onError={() => this.setState({ excesiveReq: true })}
-            src={this.state.imageUrl}
+            onLoad={this.handleOnLoad}
+            onError={this.handleOnError}
+            src={imageUrl}
             style={
-              this.state.excesiveReq
+              excesiveReq
                 ? { display: "none" }
-                : this.state.excesiveReq
+                : excesiveReq
                 ? null
                 : { display: "block" }
             }
           />
-          {this.state.excesiveReq ? (
+          {excesiveReq && (
             <h6 className="mx-auto">
               <span className="badge badge-danger mt-2">Excesive Requests</span>
             </h6>
-          ) : null}
+          )}
           <div class="card-body mx-auto">
             <h6 className="card-title">
-              {this.state.name
+              {name
                 .toLocaleLowerCase()
                 .split(" ")
                 .map(

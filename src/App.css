@@ -1,7 +1,6 @@
 .App {
   background-attachment: fixed;
   background-position: center;
-  background-repeat: nones;
   background-color: red;
   padding-top: 4rem;
   min-height: 100vh;

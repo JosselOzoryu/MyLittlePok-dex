@@ -1,12 +1,15 @@
+//CORE IMPORTS
 import React, { Component } from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
+//STYLE IMPORTS
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import "./App.css";
+//COMPONENTS IMPORT
 import NavBar from "./components/layouts/NavBar";
 import Dashboard from "./components/layouts/Dashboard";
-import PKM from './components/PKM/PKM';
+import DexterEntry from "./components/PKM/DexterEntry";
 
 import backgroundImage from "../src/background.png";
 class App extends Component {
@@ -17,10 +20,9 @@ class App extends Component {
           <NavBar />
           <div className="container">
             <Switch>
-              <Route exact path='/' component={Dashboard} />
-              <Route exact path='/PKM/:pkmIndex' component={PKM} />
-
-            <Dashboard />
+              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/PKM/:pkmIndex" component={DexterEntry} />
+              <Dashboard />
             </Switch>
           </div>
         </div>

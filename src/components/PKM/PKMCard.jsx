@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
+//multiple files for components
 
 //COMPONENT IMPORTS
 import loadingGIF from "../PKM/loading.gif";

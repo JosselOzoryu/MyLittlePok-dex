@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 //COMPONENT IMPORTS
 import loadingGIF from "../PKM/loading.gif";
+import DexterEntry from "./DexterEntry";
 
 const PKMsprite = styled.img`
   width: 5em;
@@ -47,10 +48,10 @@ export default class PKMCard extends Component {
   };
 
   componentDidMount() {
-    const { name, url } = this.props;
+    const { url } = this.props;
     const pkmIndex = url.split("/")[url.split("/").length - 2];
     const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pkmIndex}.png`;
-    this.setState({ name, imageUrl, pkmIndex });
+    this.setState({ imageUrl, pkmIndex });
   }
 
   handleOnLoad = () => this.setState({ imageIsLoading: false });
@@ -99,9 +100,9 @@ export default class PKMCard extends Component {
                 </span>
               </h6>
             )}
-            <div class="card-body mx-auto">
+            <div className="card-body mx-auto">
               <h6 className="card-title">
-                {name
+                {this.props.name
                   .toLocaleLowerCase()
                   .split(" ")
                   .map(

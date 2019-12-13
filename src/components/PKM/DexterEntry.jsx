@@ -29,14 +29,14 @@ const toCapital = s => {
 
 export default class DexterEntry extends Component {
   render() {
+    const { pkmIndex, imageUrl, name, stats } = this.state;
     return (
-      <PKMStats>
         <div className="col">
           <div className="card">
             <div className="card-header">
               <div className="row">
                 <div className="col-5">
-                  <h5>{this.state.pkmIndex}</h5>
+                  <h5>{!pkmIndex ? " " : pkmIndex}</h5>
                 </div>
                 <div className="col-7">
                   <div className="float-right">
@@ -62,14 +62,11 @@ export default class DexterEntry extends Component {
               <div className="card-body">
                 <div className="row align-items-center">
                   <div className="col-md-3">
-                    <img
-                      src={this.state.imageUrl}
-                      className="card-img-top mx-auto mt-2"
-                    />
+                    <img src={imageUrl} className="card-img-top mx-auto mt-2" />
                   </div>
                   <div className="col-md-9">
                     <h4 className="mx-auto">
-                      {this.state.name
+                      {name
                         .toLowerCase()
                         .split(" ")
                         .map(toCapital)
@@ -82,7 +79,7 @@ export default class DexterEntry extends Component {
                           <div
                             className="progress-bar"
                             role="progressBar"
-                            style={{ width: `${this.state.stats.hp}` }}
+                            style={{ width: `${stats.hp}` }}
                           ></div>
                         </div>
                       </div>
@@ -93,7 +90,6 @@ export default class DexterEntry extends Component {
             </div>
           </div>
         </div>
-      </PKMStats>
     );
   }
 }

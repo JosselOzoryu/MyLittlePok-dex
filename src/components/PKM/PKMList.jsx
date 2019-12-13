@@ -6,7 +6,7 @@ import axios from "axios";
 import PKMCard from "./PKMCard";
 export default class PKMList extends Component {
   state = {
-    url: "https://pokeapi.co/api/v2/pokemon/?limit=500",
+    url: "https://pokeapi.co/api/v2/pokemon/?limit=151",
     pkm: null
   };
 
@@ -16,17 +16,21 @@ export default class PKMList extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <React.Fragment>
         {this.state.pkm ? (
           <div className="row">
-            {this.state.pkm.map(pkm => (
-              <PKMCard 
-              key={pkm.name}
-              name={pkm.name}
-              url={pkm.url}
-              />
-            ))}
+            {this.state.pkm.map((pkmDetail, index) => {
+              let pokeKey = `${index}-${pkmDetail.name}`;
+              return (
+                <PKMCard
+                  key={pokeKey}
+                  name={pkmDetail.name}
+                  url={pkmDetail.url}
+                />
+              );
+            })}
           </div>
         ) : (
           <h1> LOADING </h1>

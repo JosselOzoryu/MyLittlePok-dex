@@ -22,7 +22,7 @@ export default class PKMstats extends Component {
     genderRatioFemale: ""
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     const { pkmIndex } = this.props.match.params;
 
     // Urls for PKM data
@@ -30,7 +30,7 @@ export default class PKMstats extends Component {
     const pkmSpeciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pkmIndex}`;
 
     //Get PKM data
-    const pkmRes = await axios.get(pkmUrl);
+    const pkmRes = axios.get(pkmUrl);
     const name = pkmRes.data.name;
     const imageUrl = pkmRes.data.sprites.front_default;
     let { hp, attack, defense, speed, specialAttack, specialDefense } = "";
@@ -63,7 +63,7 @@ export default class PKMstats extends Component {
     const weight = Math.round((pkmRes.data.weight + 0.0001) * 100) / 100;
     const types = pkmRes.data.types.map(type => type.type.name);
 
-    await axios.get(pkmSpeciesUrl).then(res => {
+    axios.get(pkmSpeciesUrl).then(res => {
       let description = "";
       res.data.flavor_text_entries.some(flavor => {
         if (flavor.language.name === "en") {
@@ -101,5 +101,23 @@ export default class PKMstats extends Component {
       height,
       weight
     });
+  }
+
+  render() {
+    const {  stats } = this.state;
+    return (
+      <div className="row align-items-center">
+        <div className="col-12 col-md-3">HP</div>
+        <div className="col-12 col-md-9">
+          <div className="progress">
+            <div
+              className="progress-bar"
+              role="progressBar"
+              style={{ width: `${stats.hp}` }}
+            ></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
